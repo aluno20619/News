@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace News.Models
 {
-    public class Utilizador
+    public class Partilha
     {
+        
+        public int UtilizadoresId { get; set; }
+        public int NoticiasId { get; set; }
     }
 }
