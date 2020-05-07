@@ -9,7 +9,7 @@ namespace News.Models
     public class Utilizadores
     {
         public Utilizadores() {
-         ListaUtilizadores = new HashSet<Utilizadores>();
+            ListaPartilha = new HashSet<Partilha>();
         }
         [Key]
         public int Id { get; set; }

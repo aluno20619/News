@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace News.Models
 {
-    public class Noticias
+    public class Noticias 
     {
+        public Noticias()
+        {
+            ListaImagens = new HashSet<Imagens>();
+        }
         [Key]
         public int Id { get; set; }
         public string Titulo { get; set; }
@@ -16,5 +20,8 @@ namespace News.Models
         public string Descricao { get; set; }
         public string Topico { get; set; }
         public bool Visivel { get; set; }
+        public ICollection<Imagens> ListaImagens { get; set; }
+        public ICollection<Partilha> ListaPartilha { get; set; }
+
     }
 }
