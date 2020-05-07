@@ -9,13 +9,11 @@ namespace News.Models
 {
     public class Imagens
     {
-        public Imagens() { 
-            ListaImagens = new HashSet<Imagens>();
-        }
         [Key]
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Legenda { get; set; }
+        
 
 
         [ForeignKey(nameof(NoticiaId))]
