@@ -13,5 +13,8 @@ namespace News.Models
         public string Titulo { get; set; }
         public string Texto1 { get; set; }
         public string Texto2 { get; set; }
+        public string Descricao { get; set; }
+        public string Topico { get; set; }
+        public bool Visivel { get; set; }
     }
 }
