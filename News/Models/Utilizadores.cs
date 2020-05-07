@@ -8,6 +8,9 @@ namespace News.Models
 {
     public class Utilizadores
     {
+        public Utilizadores() {
+         ListaUtilizadores = new HashSet<Utilizadores>();
+        }
         [Key]
         public int Id { get; set; }
         [RegularExpression("[a-zA-Z]")]
@@ -17,6 +20,6 @@ namespace News.Models
         //sugestão:Envez de bin -> booleano
         public bool Premium { get; set; }
 
-
+        public ICollection<Partilha> ListaPartilha { get; set; }
     }
 }
