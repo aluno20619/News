@@ -10,9 +10,9 @@ namespace News.Models
     public class Partilha
     {
         //Não se é assim que se junta as duas numa chave primária
-        [Key]
+        [Key,Column(Order=1)]
         public Utilizadores UtilizadorId { get; set; }
-        [Key]
+        [Key,Column(Order=2)]
         public Noticias NoticiaId { get; set; }
 
         [ForeignKey(nameof(NoticiaId))]
