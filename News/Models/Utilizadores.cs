@@ -10,7 +10,7 @@ namespace News.Models
     {
         [Key]
         public int Id { get; set; }
-        [RegularExpression("[a-zA-A]+")]
+        [RegularExpression("[a-zA-Z]")]
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
