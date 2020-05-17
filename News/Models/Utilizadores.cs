@@ -8,14 +8,15 @@ namespace News.Models
 {
     public class Utilizadores
     {
+        public Utilizadores() {
+         ListaNoticias = new HashSet<Noticias>();
+        }
+
         [Key]
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        //sugestão:Envez de bin -> booleano
-        public bool Premium { get; set; }
 
-
+        public ICollection<Noticias> ListaNoticias {get;set;}
     }
 }
