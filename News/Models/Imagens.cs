@@ -9,15 +9,15 @@ namespace News.Models
 {
     public class Imagens
     {
+        public Imagens(){
+            ListaNI = new HashSet<NI>();
+        }
+
         [Key]
         public int Id { get; set; }
-        public string Nome { get; set; }
         public string Legenda { get; set; }
-        
 
 
-        [ForeignKey(nameof(NoticiaId))]
-        public int NoticiasFK { get; set; }
-        public Noticias NoticiaId { get; set; }
+        public ICollection<NI> ListaNI {get;set;}
     }
 }

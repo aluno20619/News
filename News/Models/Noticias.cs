@@ -8,20 +8,28 @@ namespace News.Models
 {
     public class Noticias 
     {
-        public Noticias()
-        {
-            ListaImagens = new HashSet<Imagens>();
+
+
+
+        public Noticias() {
+         ListaNI = new HashSet<NI>();
+         ListaNT = new HashSet<NT>();
         }
+
         [Key]
         public int Id { get; set; }
         public string Titulo { get; set; }
-        public string Texto1 { get; set; }
-        public string Texto2 { get; set; }
-        public string Descricao { get; set; }
-        public string Topico { get; set; }
-        public bool Visivel { get; set; }
-        public ICollection<Imagens> ListaImagens { get; set; }
-        public ICollection<Partilha> ListaPartilha { get; set; }
+        public string Resumo { get; set; }
+        public string Corpo { get; set; }
+        public DateTime Data_De_Publicacao{get;set;}
+        public bool Visivel{get;set;}
+
+        [ForeignKey("Utilizadoresid")] 
+        public int UtilizadoresidFK { get; set; } 
+        public Utilizadores Utilizadoresid { get; set; } 
+        
+        public ICollection<NI> ListaNI {get;set;}
+        public ICollection<NT> ListaNT {get;set;}
 
     }
 }

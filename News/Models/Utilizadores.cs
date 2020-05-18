@@ -9,17 +9,19 @@ namespace News.Models
     public class Utilizadores
     {
         public Utilizadores() {
-            ListaPartilha = new HashSet<Partilha>();
+
+         ListaNoticias = new HashSet<Noticias>();
         }
+
+
         [Key]
         public int Id { get; set; }
         [RegularExpression("[a-zA-Z]")]
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        //sugestão:Envez de bin -> booleano
-        public bool Premium { get; set; }
 
-        public ICollection<Partilha> ListaPartilha { get; set; }
+
+        public ICollection<Noticias> ListaNoticias {get;set;}
+
     }
 }
