@@ -8,13 +8,16 @@ namespace News.Models
 {
 	public class NT
 	{
-		
-    [ForeignKey(nameof(Noticiasid))]
-    public int NoticiasidFK { get; set; }
-    public Noticias Noticiasid { get; set; }
 
-    [ForeignKey(nameof(Topicostopico))]
-    public String TopicostopicoFK { get; set; }
-    public Topicos Topicotopico { get; set; }
+        [Key, Column(Order = 1)]
+        public Noticias Noticiasid { get; set; }
+        [Key, Column(Order = 2)]
+        public Topicos Topicotopico { get; set; }
+
+        [ForeignKey(nameof(Noticiasid))]
+        public int NoticiasidFK { get; set; }
+        [ForeignKey(nameof(Topicostopico))]
+        public String TopicostopicoFK { get; set; }
+        
 }
 }
