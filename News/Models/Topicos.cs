@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 /// <summary>
 /// Summary description for Class1
@@ -7,9 +9,9 @@
 
 namespace News.Models
 {
-	public class Topico
+	public class Topicos
 	{
-		public Topico()
+		public Topicos()
 		{
 			ListaNT = new HashSet<NT>();
 		}
