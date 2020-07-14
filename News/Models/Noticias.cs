@@ -25,7 +25,7 @@ namespace News.Models
         public DateTime Data_De_Publicacao{get;set;}
         public bool Visivel{get;set;}
 
-        [ForeignKey("Utilizadoresid")] 
+        [ForeignKey(nameof(Utilizadoresid))] 
         public int UtilizadoresidFK { get; set; } 
         public Utilizadores Utilizadoresid { get; set; } 
         
