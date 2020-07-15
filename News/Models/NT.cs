@@ -11,9 +11,9 @@ namespace News.Models
 	public class NT
 	{
 
-       // [Key, Column(Order = 1)]
+        [Key, Column(Order = 1)]
         public Noticias Noticiasid { get; set; }
-        //[Key, Column(Order = 0)]
+        [Key, Column(Order = 0)]
         public Topicos Topicosid { get; set; }
 
 
@@ -21,6 +21,6 @@ namespace News.Models
         public int NoticiasidFK { get; set; }
         [ForeignKey(nameof(Topicosid))]
         public String TopicosFK { get; set; }
-        
-}
+
+    }
 }

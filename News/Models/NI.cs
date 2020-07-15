@@ -14,9 +14,9 @@ namespace News.Models
         
 
        
-       // [Key, Column(Order = 1)]
+       [Key, Column(Order = 1)]
         public Noticias Noticiasid { get; set; }
-       // [Key, Column(Order = 0)]
+       [Key, Column(Order = 0)]
         public Imagens Imagensid { get; set; }
 
 
@@ -25,6 +25,6 @@ namespace News.Models
 
         [ForeignKey(nameof(Imagensid))]
         public String ImagensidFK { get; set; }
-        
+
     }
 }
