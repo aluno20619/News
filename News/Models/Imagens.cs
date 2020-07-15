@@ -10,7 +10,7 @@ namespace News.Models
     public class Imagens
     {
         public Imagens(){
-            ListaNI = new HashSet<NI>();
+           // ListaNI = new HashSet<NI>();
         }
 
         [Key]
@@ -18,6 +18,6 @@ namespace News.Models
         public string Legenda { get; set; }
 
 
-        public ICollection<NI> ListaNI {get;set;}
+        //public ICollection<NI> ListaNI {get;set;}
     }
 }

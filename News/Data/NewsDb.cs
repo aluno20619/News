@@ -14,11 +14,12 @@ namespace News.Data
     {
         public NewsDb(DbContextOptions<NewsDb> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            //modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
-
+            modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
+            modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
+            modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
+            modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
+            modelBuilder.Entity<NI>().HasNoKey();
+            modelBuilder.Entity<NT>().HasNoKey();
 
             //modelBuilder.Entity<NI>()
             //    .HasKey(x => new { x.Imagensid, x.Noticiasid});

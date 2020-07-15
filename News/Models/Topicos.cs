@@ -13,12 +13,13 @@ namespace News.Models
 	{
 		public Topicos()
 		{
-			ListaNT = new HashSet<NT>();
+			//ListaNT = new HashSet<NT>();
 		}
 
 		[Key]
 		public String Id { get; set; }
 
-		public ICollection<NT> ListaNT { get; set; }
+
+		//public ICollection<NT> ListaNT { get; set; }
 	}
 }
