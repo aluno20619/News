@@ -14,17 +14,21 @@ namespace News.Models
         
 
        
-       [Key, Column(Order = 1)]
-        public Noticias Noticiasid { get; set; }
        [Key, Column(Order = 0)]
-        public Imagens Imagensid { get; set; }
+        public int Noticiasid { get; set; }
+       [Key, Column(Order = 1)]
+        public int Imagensid { get ; set; }
 
 
-        [ForeignKey(nameof(Noticiasid))]
-        public int NoticiasidFK { get; set; }
+        public Noticias Noticiaid { get; set; }
+        public Imagens Imagemid { get; set; }
 
-        [ForeignKey(nameof(Imagensid))]
-        public String ImagensidFK { get; set; }
+
+        [ForeignKey(nameof(Noticiaid))]
+        public int NoticiasFK { get; set; }
+
+        [ForeignKey(nameof(Imagemid))]
+        public int ImagensFK { get; set; }
 
     }
 }

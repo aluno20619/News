@@ -14,36 +14,50 @@ namespace News.Data
     {
         public NewsDb(DbContextOptions<NewsDb> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
-            modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
-            modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
-            modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
-            modelBuilder.Entity<NI>().HasNoKey();
-            modelBuilder.Entity<NT>().HasNoKey();
-
-            //modelBuilder.Entity<NI>()
-            //    .HasKey(x => new { x.Imagensid, x.Noticiasid});
-            //modelBuilder.Entity<NI>()
-            //   .HasOne(x => x.ImagensidFK)
-            //   .WithMany()
-            //   .HasForeignKey(x => x.Imagensid);
-            //modelBuilder.Entity<NI>()
-            //    .HasOne(x => x.NoticiasidFK)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.Noticiasid);
+            //modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
+            //modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
+            //modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
+            //modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
+            //modelBuilder.Entity<NI>().HasNoKey();
+            //modelBuilder.Entity<NT>().HasNoKey();
 
 
+
+            modelBuilder.Entity<NI>()
+               .HasKey(x => new { x.Imagensid, x.Noticiasid });
+
+            //modelBuilder.Entity<NI>()
+            //   .HasKey(x => x.Noticiasid );
+            //modelBuilder.Entity<NI>()
+            //   .HasAlternateKey(x => x.Imagensid);
+
+
+
+            //modelBuilder.Entity<NI>()
+            //   .HasOne<Imagens>(x => x.Imagensid)
+            //   .WithMany(c => c.ListaNI)
+            //   .HasForeignKey(x => x.ImagensidFK);
+            //modelBuilder.Entity<NI>()
+            //    .HasOne<Noticias>(x => x.Noticiasid)
+            //    .WithMany(c => c.ListaNI)
+            //    .HasForeignKey(x => x.NoticiasidFK);
+
+
+            modelBuilder.Entity<NT>()
+                .HasKey(o => new { o.Topicosid, o.Noticiasid });
+
             //modelBuilder.Entity<NT>()
-            //    .HasNoKey();
-            //    .HasKey(o => new{ o.Topicosid, o.Noticiasid});
+            //   .HasKey(x => x.Noticiasid);
             //modelBuilder.Entity<NT>()
-            //   .HasOne(x => x.TopicosFK)
-            //   .WithMany()
-            //   .HasForeignKey(x => x.Topicosid);
+            //   .HasAlternateKey(x => x.Topicosid);
             //modelBuilder.Entity<NT>()
-            //    .HasOne(x => x.NoticiasidFK)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.Noticiasid);
+            //   .HasOne<Topicos>(x => x.Topicosid)
+            //   .WithMany(c => c.ListaNT)
+            //   .HasForeignKey(x => x.TopicosFK);
+            //modelBuilder.Entity<NT>()
+            //    .HasOne<Noticias>(x => x.Noticiasid)
+            //    .WithMany(c => c.ListaNT)
+            //    .HasForeignKey(x => x.NoticiasidFK);
 
         }
 

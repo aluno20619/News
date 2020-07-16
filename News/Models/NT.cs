@@ -12,15 +12,20 @@ namespace News.Models
 	{
 
         [Key, Column(Order = 1)]
-        public Noticias Noticiasid { get; set; }
+        public int Noticiasid { get; set; }
         [Key, Column(Order = 0)]
-        public Topicos Topicosid { get; set; }
+        public string Topicosid { get; set; }
 
 
-        [ForeignKey(nameof(Noticiasid))]
-        public int NoticiasidFK { get; set; }
-        [ForeignKey(nameof(Topicosid))]
-        public String TopicosFK { get; set; }
+        public Noticias Noticiaid { get; set; }
+        
+        public Topicos Topicoid { get; set; }
+
+        [ForeignKey(nameof(Noticiaid))]
+        public int NoticiasFK { get; set; }
+
+        [ForeignKey(nameof(Topicoid))]
+        public string TopicosFK { get; set; }
 
     }
 }
