@@ -15,6 +15,8 @@ namespace News.Models
 
         [Key]
         public int Id { get; set; }
+
+        [StringLength(64, ErrorMessage = "O {0} nao deve ter menos de {1}, nem mais de {2} caracteres")]
         public string Legenda { get; set; }
 
 

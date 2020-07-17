@@ -17,9 +17,9 @@ namespace News.Models
         public string Topicosid { get; set; }
 
 
-        public Noticias Noticiaid { get; set; }
+        public virtual Noticias Noticiaid { get; set; }
         
-        public Topicos Topicoid { get; set; }
+        public virtual Topicos Topicoid { get; set; }
 
         [ForeignKey(nameof(Noticiaid))]
         public int NoticiasFK { get; set; }

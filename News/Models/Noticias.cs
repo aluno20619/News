@@ -19,15 +19,20 @@ namespace News.Models
 
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "O {0} e de preenchimento obrigatorio")]
         public string Titulo { get; set; }
+
         public string Resumo { get; set; }
+
+        [Required(ErrorMessage = "O {0} e de preenchimento obrigatorio")]
         public string Corpo { get; set; }
         public DateTime Data_De_Publicacao{get;set;}
         public bool Visivel{get;set;}
 
         [ForeignKey(nameof(Utilizadoresid))] 
         public int UtilizadoresidFK { get; set; } 
-        public Utilizadores Utilizadoresid { get; set; } 
+        public virtual Utilizadores Utilizadoresid { get; set; } 
         
         public virtual ICollection<NI> ListaNI {get;set;}
         public virtual ICollection<NT> ListaNT {get;set;}
