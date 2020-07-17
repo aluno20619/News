@@ -16,10 +16,11 @@ namespace News.Models
         [Key]
         public int Id { get; set; }
 
+        public string Nome { get; set; }
         [StringLength(64, ErrorMessage = "O {0} nao deve ter menos de {1}, nem mais de {2} caracteres")]
         public string Legenda { get; set; }
 
 
-        public virtual ICollection<NI> ListaNI {get;set;}
+        public ICollection<NI> ListaNI {get;set;}
     }
 }

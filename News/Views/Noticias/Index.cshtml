@@ -30,13 +30,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Data_De_Publicacao)
             </th>
-            <th>
+            
+            @*<th>
                 @Html.DisplayNameFor(model => model.Visivel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Utilizadoresid)
             </th>
-            <th></th>
+            <th></th>*@
+               
         </tr>
     </thead>
     <tbody>
@@ -58,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Visivel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Utilizadoresid.Id)
+                @Html.DisplayFor(modelItem => item.Utilizadoresid.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

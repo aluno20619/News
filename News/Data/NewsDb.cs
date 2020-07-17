@@ -26,38 +26,28 @@ namespace News.Data
             modelBuilder.Entity<NI>()
                .HasKey(x => new { x.Imagensid, x.Noticiasid });
 
-            //modelBuilder.Entity<NI>()
-            //   .HasKey(x => x.Noticiasid );
-            //modelBuilder.Entity<NI>()
-            //   .HasAlternateKey(x => x.Imagensid);
-
-
-
-            //modelBuilder.Entity<NI>()
-            //   .HasOne<Imagens>(x => x.Imagensid)
-            //   .WithMany(c => c.ListaNI)
-            //   .HasForeignKey(x => x.ImagensidFK);
-            //modelBuilder.Entity<NI>()
-            //    .HasOne<Noticias>(x => x.Noticiasid)
-            //    .WithMany(c => c.ListaNI)
-            //    .HasForeignKey(x => x.NoticiasidFK);
+            modelBuilder.Entity<NI>()
+               .HasOne<Imagens>(x => x.Imagens)
+               .WithMany(c => c.ListaNI)
+               .HasForeignKey(x => x.Imagensid);
+            modelBuilder.Entity<NI>()
+                .HasOne<Noticias>(x => x.Noticias)
+                .WithMany(c => c.ListaNI)
+                .HasForeignKey(x => x.Noticiasid);
 
 
             modelBuilder.Entity<NT>()
                 .HasKey(o => new { o.Topicosid, o.Noticiasid });
 
-            //modelBuilder.Entity<NT>()
-            //   .HasKey(x => x.Noticiasid);
-            //modelBuilder.Entity<NT>()
-            //   .HasAlternateKey(x => x.Topicosid);
-            //modelBuilder.Entity<NT>()
-            //   .HasOne<Topicos>(x => x.Topicosid)
-            //   .WithMany(c => c.ListaNT)
-            //   .HasForeignKey(x => x.TopicosFK);
-            //modelBuilder.Entity<NT>()
-            //    .HasOne<Noticias>(x => x.Noticiasid)
-            //    .WithMany(c => c.ListaNT)
-            //    .HasForeignKey(x => x.NoticiasidFK);
+            
+            modelBuilder.Entity<NT>()
+               .HasOne<Topicos>(x => x.Topicos)
+               .WithMany(c => c.ListaNT)
+               .HasForeignKey(x => x.Topicosid);
+            modelBuilder.Entity<NT>()
+                .HasOne<Noticias>(x => x.Noticias)
+                .WithMany(c => c.ListaNT)
+                .HasForeignKey(x => x.Noticiasid);
 
         }
 

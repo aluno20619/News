@@ -20,6 +20,6 @@ namespace News.Models
 		public String Id { get; set; }
 
 
-		public virtual ICollection<NT> ListaNT { get; set; }
+		public ICollection<NT> ListaNT { get; set; }
 	}
 }

@@ -32,10 +32,10 @@ namespace News.Models
 
         [ForeignKey(nameof(Utilizadoresid))] 
         public int UtilizadoresidFK { get; set; } 
-        public virtual Utilizadores Utilizadoresid { get; set; } 
+        public  Utilizadores Utilizadoresid { get; set; } 
         
-        public virtual ICollection<NI> ListaNI {get;set;}
-        public virtual ICollection<NT> ListaNT {get;set;}
+        public  ICollection<NI> ListaNI {get;set;}
+        public  ICollection<NT> ListaNT {get;set;}
 
     }
 }
