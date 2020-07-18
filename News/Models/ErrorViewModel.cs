@@ -1,6 +1,6 @@
 using System;
 
-namespace News.Models
+namespace NewsIdentity.Models
 {
     public class ErrorViewModel
     {

@@ -1,28 +1,17 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using News.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using News.Models;
-using Microsoft.Extensions.DependencyInjection;
-
+using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace News.Data
 {
-    public class NewsDb : DbContext
-    {
+    public class NewsDb : IdentityDbContext
+        {
         public NewsDb(DbContextOptions<NewsDb> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            //modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
-            //modelBuilder.Entity<NI>().HasNoKey();
-            //modelBuilder.Entity<NT>().HasNoKey();
-
-
-
             modelBuilder.Entity<NI>()
                .HasKey(x => new { x.Imagensid, x.Noticiasid });
 
@@ -51,12 +40,12 @@ namespace News.Data
 
         }
 
-        public DbSet<Imagens> Imagens { get; set; }
-        public DbSet<NI> NI { get; set; }
-        public DbSet<Noticias> Noticias { get; set; }
-        public DbSet<NT> NT { get; set; }
-        public DbSet<Topicos> Topicos { get; set; }
-        public DbSet<Utilizadores> Utilizadores { get; set; }
+        public virtual DbSet<Imagens> Imagens { get; set; }
+        public virtual DbSet<NI> NI { get; set; }
+        public virtual DbSet<Noticias> Noticias { get; set; }
+        public virtual DbSet<NT> NT { get; set; }
+        public virtual DbSet<Topicos> Topicos { get; set; }
+        public virtual DbSet<Utilizadores> Utilizadores { get; set; }
     }
 
 }

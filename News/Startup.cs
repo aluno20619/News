@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using News.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 
 namespace News
 {
@@ -27,12 +29,14 @@ namespace News
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<NewsDb>(options =>
+             options.UseSqlServer(
+                  Configuration.GetConnectionString("ConnectionDB")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<NewsDb>();
             services.AddControllersWithViews();
-
-            //****************************************************************************
-            // especificação do 'tipo' e 'localização' da BD
-            services.AddDbContext<NewsDb>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionDB")));
-            //****************************************************************************
+            services.AddRazorPages(); 
+           
 
         }
 
@@ -46,6 +50,7 @@ namespace News
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -57,7 +62,7 @@ namespace News
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -65,6 +70,7 @@ namespace News
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

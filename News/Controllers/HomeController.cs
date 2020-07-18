@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using News.Models;
+using NewsIdentity.Models;
 
-namespace News.Controllers
+namespace NewsIdentity.Controllers
 {
     public class HomeController : Controller
     {

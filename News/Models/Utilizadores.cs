@@ -26,7 +26,7 @@ namespace News.Models
         public string Email { get; set; }
 
 
-        public ICollection<Noticias> ListaNoticias {get;set;}
+        public virtual ICollection<Noticias> ListaNoticias {get;set;}
 
     }
 }
