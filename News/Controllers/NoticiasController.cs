@@ -12,17 +12,17 @@ namespace News.Controllers
 {
     public class NoticiasController : Controller
     {
-        private readonly NewsDb _context;
+        private readonly NewsDb bd;
 
         public NoticiasController(NewsDb context)
         {
-            _context = context;
+            bd = context;
         }
 
         // GET: Noticias
         public async Task<IActionResult> Index()
         {
-            var newsDb = _context.Noticias.Include(n => n.Utilizadoresid);
+            var newsDb = bd.Noticias.Include(n => n.Utilizadoresid);
             return View(await newsDb.ToListAsync());
         }
 
@@ -31,15 +31,15 @@ namespace News.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            var noticias = await _context.Noticias
+            var noticias = await bd.Noticias
                 .Include(n => n.Utilizadoresid)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (noticias == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             return View(noticias);
@@ -48,7 +48,7 @@ namespace News.Controllers
         // GET: Noticias/Create
         public IActionResult Create()
         {
-            ViewData["UtilizadoresidFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
+            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email");
             return View();
         }
 
@@ -61,11 +61,11 @@ namespace News.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(noticias);
-                await _context.SaveChangesAsync();
+                bd.Add(noticias);
+                await bd.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(_context.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
+            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
             return View(noticias);
         }
 
@@ -77,12 +77,12 @@ namespace News.Controllers
                 return NotFound();
             }
 
-            var noticias = await _context.Noticias.FindAsync(id);
+            var noticias = await bd.Noticias.FindAsync(id);
             if (noticias == null)
             {
                 return NotFound();
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(_context.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
+            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
             return View(noticias);
         }
 
@@ -102,8 +102,8 @@ namespace News.Controllers
             {
                 try
                 {
-                    _context.Update(noticias);
-                    await _context.SaveChangesAsync();
+                    bd.Update(noticias);
+                    await bd.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +118,7 @@ namespace News.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(_context.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
+            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
             return View(noticias);
         }
 
@@ -130,7 +130,7 @@ namespace News.Controllers
                 return NotFound();
             }
 
-            var noticias = await _context.Noticias
+            var noticias = await bd.Noticias
                 .Include(n => n.Utilizadoresid)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (noticias == null)
@@ -146,15 +146,15 @@ namespace News.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var noticias = await _context.Noticias.FindAsync(id);
-            _context.Noticias.Remove(noticias);
-            await _context.SaveChangesAsync();
+            var noticias = await bd.Noticias.FindAsync(id);
+            bd.Noticias.Remove(noticias);
+            await bd.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NoticiasExists(int id)
         {
-            return _context.Noticias.Any(e => e.Id == id);
+            return bd.Noticias.Any(e => e.Id == id);
         }
     }
 }

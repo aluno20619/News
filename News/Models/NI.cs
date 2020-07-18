@@ -21,7 +21,7 @@ namespace News.Models
         public int Noticiasid { get; set; }
 
         //[ForeignKey(nameof(Imagemid))]
-        public int Imagensid { get; set; }
+        public string Imagensid { get; set; }
 
     }
 }
