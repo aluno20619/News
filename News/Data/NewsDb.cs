@@ -1,27 +1,35 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using News.Data.Migrations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using News.Models;
-using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace News.Data
 {
-    public class NewsDb : DbContext
+    public class NewsDb : IdentityDbContext
     {
-        public NewsDb(DbContextOptions<NewsDb> options) : base(options) { }
-        protected override void OnModelCreating(ModelBuilder modelBuilder){
-            //modelBuilder.Entity<NI>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NI>().Ignore(c => c.Imagensid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Noticiasid);
-            //modelBuilder.Entity<NT>().Ignore(c => c.Topicosid);
-            //modelBuilder.Entity<NI>().HasNoKey();
-            //modelBuilder.Entity<NT>().HasNoKey();
+        public NewsDb(DbContextOptions<NewsDb> options)
+            : base(options)
+        {}
+      protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            
 
+            modelBuilder.Entity<IdentityRole<string>>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+
+            //modelBuilder.Entity<IdentityUserLogin>().HasKey(l => l.UserId);
+            //modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id);
+            //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
 
             modelBuilder.Entity<NI>()
                .HasKey(x => new { x.Imagensid, x.Noticiasid });
@@ -29,34 +37,38 @@ namespace News.Data
             modelBuilder.Entity<NI>()
                .HasOne<Imagens>(x => x.Imagens)
                .WithMany(c => c.ListaNI)
+               .OnDelete(DeleteBehavior.Restrict)
                .HasForeignKey(x => x.Imagensid);
             modelBuilder.Entity<NI>()
                 .HasOne<Noticias>(x => x.Noticias)
                 .WithMany(c => c.ListaNI)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(x => x.Noticiasid);
 
 
             modelBuilder.Entity<NT>()
                 .HasKey(o => new { o.Topicosid, o.Noticiasid });
 
-            
+
             modelBuilder.Entity<NT>()
                .HasOne<Topicos>(x => x.Topicos)
                .WithMany(c => c.ListaNT)
+               .OnDelete(DeleteBehavior.Restrict)
                .HasForeignKey(x => x.Topicosid);
             modelBuilder.Entity<NT>()
                 .HasOne<Noticias>(x => x.Noticias)
                 .WithMany(c => c.ListaNT)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasForeignKey(x => x.Noticiasid);
 
         }
 
-        public DbSet<Imagens> Imagens { get; set; }
-        public DbSet<NI> NI { get; set; }
-        public DbSet<Noticias> Noticias { get; set; }
-        public DbSet<NT> NT { get; set; }
-        public DbSet<Topicos> Topicos { get; set; }
-        public DbSet<Utilizadores> Utilizadores { get; set; }
+        public virtual DbSet<Imagens> Imagens { get; set; }
+        public virtual DbSet<Noticias> Noticias { get; set; }
+        public virtual DbSet<Topicos> Topicos { get; set; }
+        public virtual DbSet<Utilizadores> Utilizadores { get; set; }
+        public virtual DbSet<NI> NI { get; set; }
+        public virtual DbSet<NT> NT { get; set; }
     }
-
 }
+
