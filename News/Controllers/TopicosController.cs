@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,72 +10,62 @@ using News.Models;
 
 namespace News.Controllers
 {
-    public class NoticiasController : Controller
+    public class TopicosController : Controller
     {
-        private readonly NewsDb bd;
-        
-        public NoticiasController(NewsDb context)
+        private readonly NewsDb _context;
+
+        public TopicosController(NewsDb context)
         {
-            bd = context;
-            
+            _context = context;
         }
 
-        // GET: Noticias
+        // GET: Topicos
         public async Task<IActionResult> Index()
         {
-            var newsDb = bd.Noticias.Include(n => n.Utilizadoresid);
-            return View(await newsDb.ToListAsync());
+            return View(await _context.Topicos.ToListAsync());
         }
 
-        // GET: Noticias/Details/5
+        // GET: Topicos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return NotFound();
             }
 
-            var noticias = await bd.Noticias
-                .Include(n => n.Utilizadoresid)
+            var topicos = await _context.Topicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (noticias == null)
+            if (topicos == null)
             {
-                return RedirectToAction("Index");
+                return NotFound();
             }
 
-            return View(noticias);
+            return View(topicos);
         }
 
-        // GET: Noticias/Create
+        // GET: Topicos/Create
         public IActionResult Create()
         {
-            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email");
             return View();
         }
 
-        // POST: Noticias/Create
+        // POST: Topicos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Resumo,Corpo,Data_De_Publicacao,Visivel,UtilizadoresidFK")] Noticias noticias)
+        public async Task<IActionResult> Create([Bind("Id,Nome")] Topicos topicos)
         {
-           
             if (ModelState.IsValid)
             {
-                bd.Add(noticias);
-                
-                await bd.SaveChangesAsync();
-                
-
-
+                _context.Add(topicos);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
-            return View(noticias);
+            return View(topicos);
         }
 
-        // GET: Noticias/Edit/5
+        // GET: Topicos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,23 +73,22 @@ namespace News.Controllers
                 return NotFound();
             }
 
-            var noticias = await bd.Noticias.FindAsync(id);
-            if (noticias == null)
+            var topicos = await _context.Topicos.FindAsync(id);
+            if (topicos == null)
             {
                 return NotFound();
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
-            return View(noticias);
+            return View(topicos);
         }
 
-        // POST: Noticias/Edit/5
+        // POST: Topicos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Resumo,Corpo,Data_De_Publicacao,Visivel,UtilizadoresidFK")] Noticias noticias)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Topicos topicos)
         {
-            if (id != noticias.Id)
+            if (id != topicos.Id)
             {
                 return NotFound();
             }
@@ -111,12 +97,12 @@ namespace News.Controllers
             {
                 try
                 {
-                    bd.Update(noticias);
-                    await bd.SaveChangesAsync();
+                    _context.Update(topicos);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NoticiasExists(noticias.Id))
+                    if (!TopicosExists(topicos.Id))
                     {
                         return NotFound();
                     }
@@ -127,11 +113,10 @@ namespace News.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UtilizadoresidFK"] = new SelectList(bd.Utilizadores, "Id", "Email", noticias.UtilizadoresidFK);
-            return View(noticias);
+            return View(topicos);
         }
 
-        // GET: Noticias/Delete/5
+        // GET: Topicos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,31 +124,30 @@ namespace News.Controllers
                 return NotFound();
             }
 
-            var noticias = await bd.Noticias
-                .Include(n => n.Utilizadoresid)
+            var topicos = await _context.Topicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (noticias == null)
+            if (topicos == null)
             {
                 return NotFound();
             }
 
-            return View(noticias);
+            return View(topicos);
         }
 
-        // POST: Noticias/Delete/5
+        // POST: Topicos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var noticias = await bd.Noticias.FindAsync(id);
-            bd.Noticias.Remove(noticias);
-            await bd.SaveChangesAsync();
+            var topicos = await _context.Topicos.FindAsync(id);
+            _context.Topicos.Remove(topicos);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool NoticiasExists(int id)
+        private bool TopicosExists(int id)
         {
-            return bd.Noticias.Any(e => e.Id == id);
+            return _context.Topicos.Any(e => e.Id == id);
         }
     }
 }

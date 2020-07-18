@@ -1,4 +1,4 @@
-﻿@model IEnumerable<News.Models.Utilizadores>
+﻿@model IEnumerable<News.Models.NT>
 
 @{
     Layout = "_Layout";
@@ -19,10 +19,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Noticias)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Topicos)
             </th>
             <th></th>
         </tr>
@@ -31,15 +31,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.Noticias.Corpo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.Topicos.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

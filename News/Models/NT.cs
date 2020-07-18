@@ -22,7 +22,7 @@ namespace News.Models
         public int Noticiasid { get; set; }
 
         //[ForeignKey(nameof(Topicoid))]
-        public string Topicosid { get; set; }
+        public int Topicosid { get; set; }
 
     }
 }

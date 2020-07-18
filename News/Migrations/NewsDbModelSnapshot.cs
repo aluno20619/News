@@ -21,12 +21,17 @@ namespace News.Migrations
 
             modelBuilder.Entity("News.Models.Imagens", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Legenda")
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -35,8 +40,8 @@ namespace News.Migrations
 
             modelBuilder.Entity("News.Models.NI", b =>
                 {
-                    b.Property<string>("Imagensid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Imagensid")
+                        .HasColumnType("int");
 
                     b.Property<int>("Noticiasid")
                         .HasColumnType("int");
@@ -50,8 +55,8 @@ namespace News.Migrations
 
             modelBuilder.Entity("News.Models.NT", b =>
                 {
-                    b.Property<string>("Topicosid")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Topicosid")
+                        .HasColumnType("int");
 
                     b.Property<int>("Noticiasid")
                         .HasColumnType("int");
@@ -99,8 +104,13 @@ namespace News.Migrations
 
             modelBuilder.Entity("News.Models.Topicos", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

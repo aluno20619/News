@@ -1,7 +1,7 @@
 ﻿@model News.Models.Noticias
 
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
@@ -45,9 +45,10 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="UtilizadoresidFK" class="control-label"></label>
-                <select asp-for="UtilizadoresidFK" class ="form-control" asp-items="ViewBag.UtilizadoresidFK"></select>
-            </div>
+            <label asp-for="UtilizadoresidFK" class="control-label"></label>
+            <select asp-for="UtilizadoresidFK" class ="form-control" asp-items="ViewBag.UtilizadoresidFK"></select>
+        </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

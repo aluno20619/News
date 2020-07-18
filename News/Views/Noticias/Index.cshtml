@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<News.Models.Noticias>
 
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -31,13 +31,13 @@
                 @Html.DisplayNameFor(model => model.Data_De_Publicacao)
             </th>
             
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Visivel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Utilizadoresid)
             </th>
-            <th></th>*@
+            <th></th>
                
         </tr>
     </thead>
