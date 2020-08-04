@@ -21,6 +21,6 @@ namespace News.Models
         public string Legenda { get; set; }
 
 
-        public virtual ICollection<NI> ListaNI {get;set;}
+        public ICollection<NI> ListaNI {get;set;}
     }
 }
